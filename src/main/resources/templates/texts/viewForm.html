@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>글보기</title>
+</head>
+<body>
+<div>
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>제목</th>
+                <th>글쓴이</th>
+                <th>작성일</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td th:text="${one_text.title}">제목</td>
+                <td th:text="${one_text.members.idName}">아이디</td>
+                <td th:text="${one_text.dateTime}">작성 날짜</td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <a th:text="${one_text.describe}">내용</a><br>
+        <button type="button" th:onclick="|location.href='@{/board/write/edit/{id}(id = ${one_text.id})}'|"
+                th:method="post">수정
+        </button>
+        <form th:action="@{/board/delete/{id}(id = ${one_text.id})}" method="post">
+            <button type="submit">삭제</button>
+        </form>
+        <button type="button" th:onclick="|location.href='@{/}'|">취소</button>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <script th:inline="text">
+        [# th:if="${msg} == TE"]
+        alert("해당권한이 없습니다.")
+        location.href='/'[/]
+    </script>
+</div>
+</body>
+</html>

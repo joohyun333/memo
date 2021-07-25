@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>JPA 게시판 만들기</title>
+</head>
+<body>
+<h1>JPA 게시판 만들기</h1>
+<br>
+<div>
+    <div>
+        <p>로그인을 하세요.</p><br>
+        <a th:href="@{login}">로그인</a><br>
+        <a th:href="@{members/join}">회원가입 창</a>
+    </div><br>
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>글쓴이</th>
+                <th>작성일</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="text : ${texts}">
+                <td th:text="${text.id}"></td>
+                <td>
+                    <a style="cursor:pointer" th:text="${text.title}" th:href="@{/board/view/{textId}(textId=${text.id})}"></a>
+                </td>
+                <td th:text="${text.members.idName}"></td>
+                <td th:text="${text.dateTime}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

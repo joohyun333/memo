@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>글쓰기</title>
+</head>
+<body>
+<div>
+    <div>
+        <div>
+            <h1>글쓰기</h1>
+        </div>
+        <form action="/board/write" th:object="${textsForm}" method = "post">
+            <div>
+                <label th:for="title"> 제목 </label>
+                <input type="text" th:field = "*{title}" placeholder="제목을 입력하세요.">
+            </div>
+            <div>
+                <label th:for="content"> 내용 </label>
+                <input type="text" th:field = "*{content}" placeholder="내용을 입력하세요.">
+            </div>
+            <button type="submit">등록</button>
+        </form>
+        <button type="button" th:href="|location.href='@{/}'|">취소</button>
+    </div>
+</div>
+</body>
+</html>
