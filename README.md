@@ -1,6 +1,6 @@
 # memo - 혼자서 게시판 만들기
 
-### Language
+### skill stack
 
 Java, JPA, spring boot, thymeleaf, html
 
