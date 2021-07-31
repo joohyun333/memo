@@ -12,8 +12,6 @@ import project1.memo.domain.Texts;
 import project1.memo.repository.MembersRepository;
 import project1.memo.repository.TextsRepository;
 import project1.memo.service.LoginService;
-import project1.memo.service.MembersService;
-import project1.memo.service.TextsService;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;

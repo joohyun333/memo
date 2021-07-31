@@ -30,6 +30,11 @@ public class MembersRepository {
         return member;
     }
 
+    public void delete(Members members){
+        em.remove(members);
+
+    }
+
 
 
 }

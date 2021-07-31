@@ -15,6 +15,7 @@ import java.util.List;
 public class MembersService {
 
     private final MembersRepository membersRepository;
+    private final LoginService loginService;
 
     @Transactional
     public boolean join(Members members) {
@@ -48,4 +49,18 @@ public class MembersService {
     public boolean newPasswordsCoincidence(String newPassword, String newPassword2){
         return newPassword.equals(newPassword2);
     }
+
+    @Transactional
+    public boolean delete(String name, String password){
+        List<Members> byName = membersRepository.findByName(name);
+        if (byName.size()==1 && byName.get(0).getPassword().equals(password)){
+            membersRepository.delete(byName.get(0));
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
 }

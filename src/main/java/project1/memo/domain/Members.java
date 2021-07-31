@@ -25,7 +25,8 @@ public class Members {
     @Column(name = "member_password", nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "members")
+
+    @OneToMany(mappedBy = "members", cascade = CascadeType.ALL)
     private List<Texts> memos = new ArrayList<>();
 
     public static Members createMembers(String name, String password) {

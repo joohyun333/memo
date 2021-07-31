@@ -1,10 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>회원 탈퇴창</title>
 </head>
 <body>
-
+<div>
+    <div>
+        <h1>회원 탈퇴창</h1>
+        <form th:action="@{/members/withdraw}" method="post">
+            <input type="text" name="password" placeholder="비밀번호 쳐봐">
+            <button type="submit">회원탈퇴</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>

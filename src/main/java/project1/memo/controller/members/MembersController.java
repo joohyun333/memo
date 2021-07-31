@@ -11,6 +11,8 @@ import project1.memo.domain.Members;
 import project1.memo.repository.MembersRepository;
 import project1.memo.service.MembersService;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @Controller
@@ -39,6 +41,7 @@ public class MembersController {
         return "redirect:/";
     }
 
+    //회원 관리
     @GetMapping("members/memberInfo")
     public String memberInfo(){
         return "members/memberInfo";
@@ -83,7 +86,25 @@ public class MembersController {
 
     //회원탈퇴
     @GetMapping("members/withdraw")
-    public String memberWithdraw(){
-        return "members/";
+    public String memberWithdrawForm(){
+        return "members/withdrawForm";
+    }
+
+    @PostMapping("members/withdraw")
+    public String memberWithdraw(@CookieValue(name = "memberId", required = false, defaultValue = "") String idName,
+                                 Model model, HttpServletResponse response,
+                                 String password){
+        boolean delete = membersService.delete(idName, password);
+        if(delete){
+            model.addAttribute("msg","DELETE");
+            Cookie cookie = new Cookie("memberId", null);
+            cookie.setMaxAge(0);
+            response.addCookie(cookie);
+            return "members/alertsRedirect";
+        }
+        else {
+            model.addAttribute("msg", "accNotCoincidenceInDelete");
+            return "members/alertsRedirect";
+        }
     }
 }
