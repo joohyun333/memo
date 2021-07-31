@@ -4,9 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import project1.memo.domain.Members;
+import project1.memo.repository.MembersRepository;
 import project1.memo.service.MembersService;
 
 import javax.validation.Valid;
@@ -16,6 +18,7 @@ import javax.validation.Valid;
 public class MembersController {
 
     private final MembersService membersService;
+    private final MembersRepository membersRepository;
 
     @GetMapping("members/join")
     public String joinForm(Model model){
@@ -34,5 +37,53 @@ public class MembersController {
             return "members/joinForm";
         }
         return "redirect:/";
+    }
+
+    @GetMapping("members/memberInfo")
+    public String memberInfo(){
+        return "members/memberInfo";
+    }
+
+    //비번 수정
+    @GetMapping("members/modifyInfo")
+    public String modifyInfoForm(@CookieValue(name = "memberId", required = false) String memberId, Model model){
+        if(memberId == null){
+            return "redirect:/";
+        }
+        Members member = membersRepository.findByName(memberId).get(0);
+        MemberModifyForm build = MemberModifyForm.builder().name(member.getIdName()).build();
+        model.addAttribute("Info", build);
+        return "members/modifyForm";
+    }
+
+    @PostMapping("members/modifyInfo")
+    public String modifyInfo(@CookieValue(name = "memberId", required = false) String memberId,
+                             MemberModifyForm memberModifyForm, Model model){
+        //새비밀번호와 새비밀번호가 일치하지 않을 때
+        if(!membersService.newPasswordsCoincidence(memberModifyForm.getNew_password(),
+                memberModifyForm.getNew_password_valid())){
+            model.addAttribute("msg", "notNewPassCoincidence");
+            return "members/alertsRedirect";
+        }
+        else {
+            //기존의 비번이랑 아이디가 일치하는지 여부(true 일치, false 불일치)
+            boolean updateInfo = membersService.validateMembersAndModifyPassword(memberId,
+                    memberModifyForm.getPassword(),
+                    memberModifyForm.getNew_password());
+            if (updateInfo) {
+                model.addAttribute("msg", "MODIFY");
+                return "members/alertsRedirect";
+            }
+            else {
+                model.addAttribute("msg", "accNotCoincidence");
+                return "members/alertsRedirect";
+            }
+        }
+    }
+
+    //회원탈퇴
+    @GetMapping("members/withdraw")
+    public String memberWithdraw(){
+        return "members/";
     }
 }

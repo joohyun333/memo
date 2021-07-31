@@ -4,6 +4,7 @@ package project1.memo.domain;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import project1.memo.controller.members.MemberModifyForm;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -27,10 +28,14 @@ public class Members {
     @OneToMany(mappedBy = "members")
     private List<Texts> memos = new ArrayList<>();
 
-    public static Members createMembers(String name, String password){
+    public static Members createMembers(String name, String password) {
         Members members = new Members();
         members.idName = name;
         members.password = password;
         return members;
+    }
+
+    public void updatePassword(String password) {
+        this.password = password;
     }
 }

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원관리</title>
+</head>
+<body>
+<div>
+    <h1>회원관리 창</h1>
+    <button type="button" th:onclick="|location.href = '@{/members/modifyInfo}'|">비밀 번호 변경</button>
+    <button type="button" th:onclick="|location.href = '@{/members/withdraw}'|">회원 탈퇴</button>
+    <button type="button" th:onclick="|location.href = '@{/}'|">메인 화면으로</button>
+</div>
+</body>
+</html>

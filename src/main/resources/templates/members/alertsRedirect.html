@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>redirect</title>
+</head>
+<body>
+<div>
+    <script th:inline="text">
+        [# th:if="${msg} == Error"]
+        alert("해당 작업을 수행할 권한이 없습니다.")
+        location.href='/'[/]
+        [# th:if="${msg} == notNewPassCoincidence"]
+        alert("새 비밀번호와 비밀번호 확인이 일치하지 않습니다.")
+        location.href='/members/modifyInfo'[/]
+        [# th:if="${msg} == accNotCoincidence"]
+        alert("아이디와 비밀번호가 일치하지 않습니다.")
+        location.href='/members/modifyInfo'[/]
+        [# th:if="${msg} == DELETE"]
+        alert("회원 탈퇴를 완료했습니다. 그동안 이용해주셔서 감사합니 퉷!(침 뱉는 소리)")
+        location.href='/'[/]
+        [# th:if="${msg} == MODIFY"]
+        alert("회원 수정을 완료했습니다.")
+        location.href='/'[/]
+    </script>
+</div>
+</body>
+</html>

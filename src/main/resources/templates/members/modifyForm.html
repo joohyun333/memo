@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원 정보 수정</title>
+</head>
+<body>
+<div>
+    <div>
+        <h1>비밀 번호 수정하기</h1>
+    </div>
+    <form th:action = "@{/members/modifyInfo}" th:object="${Info}" method="post">
+        <div>
+            <input type="password" th:field = "*{password}" placeholder="현재 비밀번호">
+        </div>
+        <div>
+            <input type="password" th:field = "*{new_password}" placeholder="새 비밀번호">
+        </div>
+        <div>
+            <input type="password" th:field = "*{new_password_valid}" placeholder="새 비밀번호 확인">
+        </div>
+        <button type="submit">수정</button>
+    </form>
+</div>
+</body>
+</html>

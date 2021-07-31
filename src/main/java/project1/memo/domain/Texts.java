@@ -47,10 +47,6 @@ public class Texts {
         return texts;
     }
 
-    public void setDescribe(String content){
-        this.describe = content;
-    }
-
     public void updateInfo(TextsForm dto){
         if (!dto.getTitle().isEmpty()){
             this.title = dto.getTitle();

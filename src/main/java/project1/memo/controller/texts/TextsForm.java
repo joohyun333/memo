@@ -2,10 +2,9 @@ package project1.memo.controller.texts;
 
 import lombok.*;
 
-@Setter
 @Getter
 @Builder
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class TextsForm {
     String title;
