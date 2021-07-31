@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>내가 쓴 글 보기</title>
+</head>
+<body>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>글쓴이</th>
+            <th>작성일</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="memo : ${memos}">
+            <td th:text="${memo.id}"></td>
+            <td>
+                <a style="cursor:pointer" th:text="${memo.title}" th:href="@{/board/view/{textId}(textId=${memo.id})}"></a>
+            </td>
+            <td th:text="${memo.members.idName}"></td>
+            <td th:text="${memo.dateTime}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

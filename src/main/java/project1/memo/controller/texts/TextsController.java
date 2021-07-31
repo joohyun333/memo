@@ -14,6 +14,8 @@ import project1.memo.repository.MembersRepository;
 import project1.memo.repository.TextsRepository;
 import project1.memo.service.TextsService;
 
+import java.util.List;
+
 
 @Controller
 @RequiredArgsConstructor
@@ -47,12 +49,52 @@ public class TextsController {
     public String delete(@PathVariable(name = "textId") Long id,
                          @CookieValue(name = "memberId", required = false, defaultValue = "") String name,
                          Model model) {
-        boolean delete_vaild = textsService.deleteTexts(id, name);
-        if (delete_vaild) {
-            return "redirect:/";
-        } else {
-            model.addAttribute("msg", "TE");//삭제 못한다는 알림날리기
+        boolean delete_valid = textsService.deleteTexts(id, name);
+        if (delete_valid) {
+            model.addAttribute("msg", "DELETE");//삭제한다는 알림날리기
             return "texts/alertsRedirect";
+        } else {
+            model.addAttribute("msg", "Error");//삭제 못한다는 알림날리기
+            return "texts/alertsRedirect";
+        }
+    }
+
+    @GetMapping("board/edit/{textsId}")
+    public String update(@PathVariable(name = "textsId") Long id,
+                         @CookieValue(name = "memberId", required = false, defaultValue = "") String name
+            , Model model) {
+        boolean valid = textsService.valid(id, name);
+        if (valid) {
+            Texts text = textsRepository.findOne(id);
+            TextsForm textsForm = TextsForm.builder().title(text.getTitle()).content(text.getDescribe()).build();
+            model.addAttribute("textId", id);
+            model.addAttribute("textForm", textsForm);
+            return "texts/modifyForm";
+        } else {
+            model.addAttribute("msg", "Error");
+            return "texts/alertsRedirect";
+        }
+    }
+
+    @PostMapping("board/edit/{textsId}")
+    public String update(@PathVariable(name = "textsId") Long id,
+                         Model model,
+                         TextsForm textForm) {
+        textsService.update(id, textForm);
+        model.addAttribute("msg", "MODIFY");
+        return "texts/alertsRedirect";
+    }
+
+    @GetMapping("board/my-memos")
+    public String personalTexts(@CookieValue(name = "memberId", required = false, defaultValue = "") String name, Model model) {
+        if (name.isEmpty()){
+            model.addAttribute("msg","Error");
+            return "texts/alertsRedirect";
+        }
+        else {
+            List<Texts> memos = membersRepository.findByName(name).get(0).getMemos();
+            model.addAttribute("memos", memos);
+            return "texts/personalForm";
         }
     }
 }

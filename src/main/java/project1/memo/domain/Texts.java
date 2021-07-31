@@ -3,6 +3,8 @@ package project1.memo.domain;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.util.StringUtils;
+import project1.memo.controller.texts.TextsForm;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -49,5 +51,12 @@ public class Texts {
         this.describe = content;
     }
 
-
+    public void updateInfo(TextsForm dto){
+        if (!dto.getTitle().isEmpty()){
+            this.title = dto.getTitle();
+        }
+        if (!dto.getContent().isBlank()){
+            this.describe = dto.getContent();
+        }
+    }
 }

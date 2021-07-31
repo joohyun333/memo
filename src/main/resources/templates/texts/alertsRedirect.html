@@ -7,8 +7,14 @@
 <body>
 <div>
     <script th:inline="text">
-        [# th:if="${msg} == TE"]
+        [# th:if="${msg} == Error"]
         alert("해당권한이 없습니다.")
+        location.href='/'[/]
+        [# th:if="${msg} == DELETE"]
+        alert("삭제를 완료했습니다.")
+        location.href='/'[/]
+        [# th:if="${msg} == MODIFY"]
+        alert("수정을 완료했습니다.")
         location.href='/'[/]
     </script>
 </div>

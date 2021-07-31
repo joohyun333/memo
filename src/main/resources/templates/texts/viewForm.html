@@ -25,9 +25,7 @@
         </table>
         <br>
         <a th:text="${one_text.describe}">내용</a><br>
-        <button type="button" th:onclick="|location.href='@{/board/write/edit/{id}(id = ${one_text.id})}'|"
-                th:method="post">수정
-        </button>
+        <button type="button" th:onclick="|location.href='@{/board/edit/{id}(id = ${one_text.id})}'|">수정</button>
         <form th:action="@{/board/delete/{id}(id = ${one_text.id})}" method="post">
             <button type="submit">삭제</button>
         </form>
