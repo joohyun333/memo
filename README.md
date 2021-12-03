@@ -6,4 +6,4 @@ Java, JPA, spring boot, thymeleaf, html
 
 ### Notion - Links
 
-[Notion](https://joohyun.notion.site/9bb7e0e383b142ce9d8d6436c6b47829 "memo 게시판")  
+[Notion](https://elemental-structure-b8f.notion.site/JPA-251d052cdfd844d99511e9d6f3728bb0 "memo 게시판")  
